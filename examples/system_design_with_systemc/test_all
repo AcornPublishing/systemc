@@ -1,0 +1,10 @@
+#!/bin/sh
+
+for i in [1-9]*
+do
+  echo
+  echo --- Running $i ----
+  echo
+  $i/run.x 2>&1
+done
+

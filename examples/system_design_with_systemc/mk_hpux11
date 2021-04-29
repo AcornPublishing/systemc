@@ -1,0 +1,27 @@
+#!/bin/sh
+
+CC=aCC
+FLAGS="-g -Aa -ext +DA2.0 +DS2.0 "
+INCDIR=../../../include
+LIBDIR=../../../lib-hpux11
+OUTNAME=run.x
+FILTER=c++filt
+
+if test $# = 0
+then
+ DIRS=[1-9]* ;
+else
+ DIRS=$@ ;
+fi
+
+set -e
+set -x
+
+for i in $DIRS
+do
+ cd $i
+ $CC $FLAGS -I. -I$INCDIR *.cpp -L$LIBDIR -o $OUTNAME \
+    -lsystemc -lm 2>&1 | $FILTER 
+ cd ..
+done
+

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+rm -rf */*.o */run.x */SunWS_cache log.dat trace.awif trace.vcd

@@ -1,0 +1,27 @@
+#!/bin/sh
+
+CC=CC
+FLAGS="-g "
+INCDIR=../../../include
+LIBDIR=../../../lib-sparcOS5
+OUTNAME=run.x
+FILTER=c++filt
+
+if test $# = 0
+then
+ DIRS=[1-9]* ;
+else
+ DIRS=$@ ;
+fi
+
+set -e
+set -x
+
+for i in $DIRS
+do
+ cd $i
+ $CC $FLAGS -I. -I$INCDIR *.cpp -L$LIBDIR -o $OUTNAME \
+    -lsystemc -lm 2>&1 | $FILTER 
+ cd ..
+done
+
